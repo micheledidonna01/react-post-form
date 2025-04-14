@@ -37,8 +37,12 @@ function App() {
 
   function handleSubmit(e){
     e.preventDefault();
-    // setMenu((menu) => [...menu, { id: Date.now(), ...formData }]);
-    setLibrary([...library, formBook]);
+    if(formBook.author && formBook.body && formBook.title){
+      alert('Libro aggiunto con successo!');
+      setLibrary([...library, formBook]);
+    }else{
+      alert('Devi inserire tutti i campi')
+    }
     setFormBook(initialFormBook);
     
   }
@@ -51,44 +55,48 @@ function App() {
   
   return (
     <>
-      <div className="container">
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="section-form">
-            <label htmlFor="author">Author:</label>
+      <div className="container mx-auto d-flex align-items-center">
+        <form className="form d-flex row wrap gap-2" onSubmit={handleSubmit}>
+          <div className="form-floating">
             <input type="text"
-              className="form"
+              className="form-control"
               value={formBook.author}
               onChange={handleFormData}
               name="author"
+              placeholder="insert Author"
             />
+            <label htmlFor="author" className="">Name of Author</label>
           </div>
-          <div className="section-form">
-            <label htmlFor="title">Title:</label>
+          <div className="form-floating">
             <input type="text"
-              className="form"
+              className="form-control"
               value={formBook.title}
               onChange={handleFormData}
               name="title"
+              placeholder="insert Title of book"
             />
+            <label htmlFor="title">Title of Book</label>
           </div>
-          <div className="section-form">
-            <label htmlFor="body">Body:</label>
+          <div className="form-floating">
             <input type="text"
-              className="form"
+              className="form-control"
               value={formBook.body}
               onChange={handleFormData}
               name="body"
+              placeholder="insert Note of book"
             />
+            <label htmlFor="body">Note of Book</label>
           </div>
           <div className="section-form">
             <input type="checkbox"
-              className="form"
+              className="form-check-input"
               value={formBook.public}
               onChange={handleFormData}
               name="public"
             />
+            <label htmlFor="public" className="form-check-label text-white">Public</label>
           </div>
-          <button className="btn btn-outline-primary">Send Form</button>
+          <button className="btn btn-outline-primary text-white">Send Form</button>
         </form>
       </div>
     </>
